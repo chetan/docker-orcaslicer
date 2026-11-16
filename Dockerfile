@@ -56,8 +56,9 @@ RUN \
     ORCASLICER_VERSION=$(curl -sX GET "https://api.github.com/repos/OrcaSlicer/OrcaSlicer/releases/latest" \
     | jq -r '.tag_name'); \
   fi && \
-  RELEASE_URL=$(curl -sX GET "https://api.github.com/repos/OrcaSlicer/OrcaSlicer/releases/latest"     | jq -r '.url') && \
-  DOWNLOAD_URL=$(curl -sX GET "${RELEASE_URL}" | jq -r 'first(.assets[].browser_download_url | select(test("Ubuntu2404_V")))') && \
+# Replaced github release w/ mcp capable version (MaxEllis fork of OrcaSlicer)
+  RELEASE_URL=$(curl -sX GET "https://api.github.com/repos/MaxEllis/OrcaSlicer/releases/latest" | jq -r '.url') && \
+  DOWNLOAD_URL=$(curl -sX GET "${RELEASE_URL}" | jq -r 'first(.assets[].browser_download_url | select(test("linux-x64")))') && \
   cd /tmp && \
   curl -o \
     /tmp/orca.app -L \
